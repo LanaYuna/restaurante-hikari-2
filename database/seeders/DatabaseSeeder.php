@@ -2,24 +2,34 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Categoria;
+use App\Models\Produto;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Criando Categorias
+        $lanches = Categoria::create(['descricao' => 'Lanches']);
+        $bebidas = Categoria::create(['descricao' => 'Bebidas']);
+        $frangos = Categoria::create(['descricao' => 'Frango']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // 2. Criando Produtos vinculados às categorias
+        Produto::create([
+            'nome' => 'X-Burguer Especial',
+            'descricao' => 'Pão, carne artesanal, queijo cheddar e maionese da casa.',
+            'preco' => 28.50,
+            'imagem' => 'produtos/xburguer.jpg',
+            'categoria_id' => $lanches->id
+        ]);
+
+        Produto::create([
+            'nome' => 'Refrigerante Lata 350ml',
+            'descricao' => 'Coca-Cola, Guaraná ou Sprite gelado.',
+            'preco' => 6.00,
+            'imagem' => 'produtos/refi.jpg',
+            'categoria_id' => $bebidas->id
         ]);
     }
 }

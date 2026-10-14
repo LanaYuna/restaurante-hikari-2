@@ -1,11 +1,7 @@
 <x-app-layout>
-    
-    <div class="grid grid-cols-3 gap-4">
-        @foreach($produtos as $produto)
-            <!-- Chamando o componente sem ser admin -->
-            <x-produto :produto="$produto" :isAdmin="false" />
+    <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        @foreach($categorias as $categoria)
+            <x-categoria :categoria="$categoria" :isAdmin="false" />
         @endforeach
     </div>
-
 </x-app-layout>
-
