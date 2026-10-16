@@ -15,10 +15,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-zinc-950 text-gray-100 min-h-screen flex flex-col">
-        <div class="min-h-screen bg-zinc-950">
-            @include('layouts.navigation')
-            
-            <main class="py-6">
+        <div class="min-h-screen bg-zinc-950">            
+            <main>
                 {{ $slot }}
             </main>
         </div>

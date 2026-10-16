@@ -22,14 +22,23 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-Route::get('/admin/menu', [AdmMenuController::class, 'index'])->name('admin.menu');
+
+Route::get('/carrinho', function() {
+    return view('carrinho');
+});
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    
-    // Rota para exibir a página de edição (GET)
-    Route::get('/produtos/{id}/edit', [AdmProdutoController::class, 'editar'])->name('produtos.editar');
 
-    // Rota para processar a exclusão do produto (DELETE)
+    Route::get('/menu', [AdmMenuController::class, 'index'])->name('menu');
+
+    Route::get('/produtos/criar', [AdmProdutoController::class, 'criar'])->name('produtos.criar');
+
+    Route::put('/produtos/add', [AdmProdutoController::class, 'adicionar'])->name('produtos.adicionar');
+    
+    Route::get('/produtos/{id}/edit', [AdmProdutoController::class, 'editar'])->name('produtos.editar');
+    
+    Route::put('/produtos/{id}', [AdmProdutoController::class, 'atualizar'] )->name('produtos.atualizar');
+
     Route::delete('/produtos/{id}', [AdmProdutoController::class, 'remover'])->name('produtos.remover');
 
 });

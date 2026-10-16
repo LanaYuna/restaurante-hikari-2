@@ -1,10 +1,10 @@
 @props(['produto', 'isAdmin' => false])
 
-<div class="bg-zinc-900 overflow-hidden shadow-sm sm:rounded-lg p-4 flex flex-col justify-between">
+<div class="bg-zinc-900 overflow-hidden shadow-sm sm:rounded-lg p-4 flex flex-col justify-between w-64">
     <div>
-        <img src="{{ asset($produto->imagem) }}" alt="{{ $produto->nome }}" class="h-32 w-full object-cover rounded-md mb-2">
-        <h4 class="font-bold text-gray-900 text-lg">{{ $produto->nome }}</h4>
-        <p class="text-gray-900 text-sm">R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
+        <img src="{{ asset('storage/' . $produto->imagem) }}" alt="{{ $produto->nome }}" class="h-32 w-32 object-cover rounded-md mb-2">
+        <h4 class="font-bold text-white text-lg">{{ $produto->nome }}</h4>
+        <p class="text-white text-sm">R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
     </div>
 
     @if($isAdmin)
