@@ -22,7 +22,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('menu'));;
+        return redirect()->route(
+            $request->user()->tipo === 'admin'
+                ? 'admin.menu'
+                : 'menu'
+        );
     }
 
     public function destroy(Request $request): RedirectResponse

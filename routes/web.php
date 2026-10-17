@@ -47,7 +47,10 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
     // Administração
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')
+        ->name('admin.')
+        ->middleware('admin')
+        ->group(function () {
 
         Route::get('/menu', [AdmMenuController::class, 'index'])
             ->name('menu');
