@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\AdmMenuController;
 use App\Http\Controllers\Admin\AdmProdutoController;
+use App\Http\Controllers\CarrinhoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,9 +23,13 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
-Route::get('/carrinho', function() {
-    return view('carrinho');
-});
+Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class,'adicionar'])->name('carrinho.adicionar');
+
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+
+Route::delete('/carrinho/remover/{id}', [CarrinhoController::class,'remover'])->name('carrinho.remover');
+
+Route::patch('/carrinho/editar/{id}', [CarrinhoController::class,'editar'])->name('carrinho.editar');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

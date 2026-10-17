@@ -32,8 +32,12 @@
             </form>
         </div>
     @else
-        <div class="mt-4">
-            <button class="w-full bg-blue-600 text-white py-1 rounded-md text-sm">Adicionar ao Carrinho</button>
-        </div>
+        <form action="{{ route('carrinho.adicionar', $produto->id) }}" method="POST">
+            @csrf
+
+            <button class="bg-indigo-700" type="submit">
+                Adicionar ao carrinho
+            </button>
+        </form>
     @endif
 </div>
