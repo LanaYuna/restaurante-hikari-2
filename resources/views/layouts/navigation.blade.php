@@ -2,9 +2,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center gap-4">
             
-            <!-- 1. Barra de Busca -->
             <div class="flex-1 max-w-xl">
-                <form action="{{ route('dashboard') }}" method="GET" class="relative">
+                <form action="{{ route('menu') }}" method="GET" class="relative">
                     <input 
                         type="text" 
                         name="search" 

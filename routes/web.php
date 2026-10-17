@@ -8,43 +8,70 @@ use App\Http\Controllers\Admin\AdmProdutoController;
 use App\Http\Controllers\CarrinhoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check()
+        ? redirect()->route('menu')
+        : redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// Todas as rotas abaixo exigem login.
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+    // Menu do usuário
+    Route::get('/menu', [MenuController::class, 'index'])
+        ->name('menu');
 
-Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class,'adicionar'])->name('carrinho.adicionar');
+    // Carrinho
+    Route::post('/carrinho/adicionar/{id}', [
+        CarrinhoController::class, 'adicionar'
+    ])->name('carrinho.adicionar');
 
-Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+    Route::get('/carrinho', [CarrinhoController::class, 'index'])
+        ->name('carrinho.index');
 
-Route::delete('/carrinho/remover/{id}', [CarrinhoController::class,'remover'])->name('carrinho.remover');
+    Route::delete('/carrinho/remover/{id}', [
+        CarrinhoController::class, 'remover'
+    ])->name('carrinho.remover');
 
-Route::patch('/carrinho/editar/{id}', [CarrinhoController::class,'editar'])->name('carrinho.editar');
+    Route::patch('/carrinho/editar/{id}', [
+        CarrinhoController::class, 'editar'
+    ])->name('carrinho.editar');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
 
-    Route::get('/menu', [AdmMenuController::class, 'index'])->name('menu');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
 
-    Route::get('/admin/categorias/{categoria}/produtos/criar', [AdmProdutoController::class, 'criar'])->name('produtos.criar');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 
-    Route::post('/produtos/add', [AdmProdutoController::class, 'adicionar'])->name('produtos.adicionar');
-    
-    Route::get('/produtos/{id}/edit', [AdmProdutoController::class, 'editar'])->name('produtos.editar');
+    // Administração
+    Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::put('/produtos/{id}', [AdmProdutoController::class, 'atualizar'] )->name('produtos.atualizar');
+        Route::get('/menu', [AdmMenuController::class, 'index'])
+            ->name('menu');
 
-    Route::delete('/produtos/{id}', [AdmProdutoController::class, 'remover'])->name('produtos.remover');
+        Route::get('/categorias/{categoria}/produtos/criar', [
+            AdmProdutoController::class, 'criar'
+        ])->name('produtos.criar');
 
+        Route::post('/produtos/add', [
+            AdmProdutoController::class, 'adicionar'
+        ])->name('produtos.adicionar');
+
+        Route::get('/produtos/{id}/edit', [
+            AdmProdutoController::class, 'editar'
+        ])->name('produtos.editar');
+
+        Route::put('/produtos/{id}', [
+            AdmProdutoController::class, 'atualizar'
+        ])->name('produtos.atualizar');
+
+        Route::delete('/produtos/{id}', [
+            AdmProdutoController::class, 'remover'
+        ])->name('produtos.remover');
+    });
 });
 
 require __DIR__.'/auth.php';

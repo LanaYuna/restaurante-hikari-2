@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Botão Voltar e Título -->
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-3xl font-extrabold text-white tracking-tight">Meu Carrinho</h1>
             <a href="{{ route('menu') }}" class="text-sm font-medium text-gray-400 hover:text-red-500 transition">
