@@ -9,12 +9,26 @@
 
     @if($isAdmin)
         <div class="mt-4 flex gap-2 border-t pt-2">
-            <a href="{{ route('admin.produtos.editar', $produto->id) }}" class="text-indigo-600 text-sm font-semibold">Editar</a>
+            <a 
+                href="{{ route('admin.produtos.editar', $produto->id) }}" 
+                class="text-indigo-600 text-sm font-semibold">
+                Editar
+            </a>
     
-            <form action="{{ route('admin.produtos.remover', $produto->id) }}" method="POST">
+            <form 
+                action="{{ route('admin.produtos.remover', $produto->id) }}" 
+                method="POST"  
+                onsubmit="return confirm('Deseja realmente remover este produto?')"
+            >
+
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-red-600 text-sm font-semibold">Remover</button>
+
+                <button 
+                    type="submit" class="text-red-600 text-sm font-semibold">
+                    Remover
+                </button>
+
             </form>
         </div>
     @else

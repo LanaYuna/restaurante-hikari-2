@@ -20,7 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
 Route::get('/carrinho', function() {
@@ -31,12 +30,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/menu', [AdmMenuController::class, 'index'])->name('menu');
 
-    Route::get('/produtos/criar', [AdmProdutoController::class, 'criar'])->name('produtos.criar');
+    Route::get('/admin/categorias/{categoria}/produtos/criar', [AdmProdutoController::class, 'criar'])->name('produtos.criar');
 
-    Route::put('/produtos/add', [AdmProdutoController::class, 'adicionar'])->name('produtos.adicionar');
+    Route::post('/produtos/add', [AdmProdutoController::class, 'adicionar'])->name('produtos.adicionar');
     
     Route::get('/produtos/{id}/edit', [AdmProdutoController::class, 'editar'])->name('produtos.editar');
-    
+
     Route::put('/produtos/{id}', [AdmProdutoController::class, 'atualizar'] )->name('produtos.atualizar');
 
     Route::delete('/produtos/{id}', [AdmProdutoController::class, 'remover'])->name('produtos.remover');

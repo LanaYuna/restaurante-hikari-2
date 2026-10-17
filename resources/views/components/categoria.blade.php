@@ -15,7 +15,7 @@
             <x-produto :produto="$produto" :isAdmin="$isAdmin" />
         @empty
             @if($isAdmin)
-                <a href="{{ route('admin.produtos.criar') }}" class="bg-blue-600 w-64">Adicionar novo produto</a>
+                <a href="{{ route('admin.produtos.criar', $categoria->id) }}" class="bg-blue-600 w-64">Adicionar novo produto</a>
             @else
                 <p class="text-gray-500 italic col-span-full">Nenhum produto cadastrado nesta categoria no momento.</p>
             @endif

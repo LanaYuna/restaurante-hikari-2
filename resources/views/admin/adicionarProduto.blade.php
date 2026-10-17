@@ -16,7 +16,10 @@
             >
                 @csrf
 
-                
+                <input type="hidden"
+                    name="categoria_id"
+                    value="{{ $categoria->id }}">
+
                 <div>
                     <label for="nome" class="block text-sm font-medium text-gray-300 mb-1">Nome do Produto:</label>
                     <input
