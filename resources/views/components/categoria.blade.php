@@ -8,17 +8,19 @@
     @if($isAdmin)
         <button class="bg-blue-600">Editar</button>
         <button class="bg-red-600">Remover</button>
+        <a 
+            href="{{ route('admin.produtos.criar', $categoria->id) }}" 
+            class="bg-blue-600 w-64">
+            Adicionar novo produto
+        </a>
     @endif
 
     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         @forelse($categoria->produtos as $produto)
             <x-produto :produto="$produto" :isAdmin="$isAdmin" />
         @empty
-            @if($isAdmin)
-                <a href="{{ route('admin.produtos.criar', $categoria->id) }}" class="bg-blue-600 w-64">Adicionar novo produto</a>
-            @else
-                <p class="text-gray-500 italic col-span-full">Nenhum produto cadastrado nesta categoria no momento.</p>
-            @endif
+            <p class="text-gray-500 italic col-span-full">Nenhum produto cadastrado nesta categoria no momento.</p>
+
         @endforelse
     </div>
 </div>

@@ -50,7 +50,7 @@
 
                         <x-slot name="content">
                             <div class="bg-zinc-800 border border-zinc-700 rounded-md py-1">
-                                <x-dropdown-link :href="route('profile.edit')" class="text-gray-300 hover:bg-zinc-700 hover:text-white">
+                                <x-dropdown-link :href="route('profile.show')" class="text-gray-300 hover:bg-zinc-700 hover:text-white">
                                     {{ __('Meu Perfil') }}
                                 </x-dropdown-link>
 

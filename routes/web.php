@@ -14,7 +14,8 @@ Route::get('/', function () {
 });
 
 // Todas as rotas abaixo exigem login.
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')
+    ->group(function () {
 
     // Menu do usuário
     Route::get('/menu', [MenuController::class, 'index'])
@@ -37,12 +38,21 @@ Route::middleware('auth')->group(function () {
     ])->name('carrinho.editar');
 
     // Perfil
-    Route::get('/profile', [ProfileController::class, 'edit'])
+     Route::get('/profile', [ProfileController::class, 'show'])
+        ->name('profile.show');
+
+    // Editar perfil
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
     Route::patch('/profile', [ProfileController::class, 'update'])
         ->name('profile.update');
 
+    // Tela de confirmação para excluir a conta
+    Route::get('/profile/delete', [ProfileController::class, 'confirmDelete'])
+        ->name('profile.confirmDelete');
+
+    // Excluir conta
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 

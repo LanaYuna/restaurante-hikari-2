@@ -51,7 +51,6 @@ class CarrinhoController extends Controller
         // 4. Salva o carrinho atualizado na sessão
         session()->put('carrinho', $carrinho);
 
-        // 5. Retorna para a página anterior
         return back()->with(
             'success',
             'Produto adicionado ao carrinho!'
@@ -72,7 +71,6 @@ class CarrinhoController extends Controller
     }
 
     public function editar(Request $request, $id){
-        // 1. Validar a quantidade enviada pelo formulário
         $dados = $request->validate([
             'quantidade' => 'required|integer|min:1|max:99',
         ]);
