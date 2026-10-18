@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\AdmMenuController;
 use App\Http\Controllers\Admin\AdmProdutoController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\EnderecoController;
 
 Route::get('/', function () {
     return auth()->check()
@@ -14,13 +15,31 @@ Route::get('/', function () {
 });
 
 // Todas as rotas abaixo exigem login.
-Route::middleware('auth')
-    ->group(function () {
+Route::middleware('auth')->group(function () {
 
     // Menu do usuário
     Route::get('/menu', [MenuController::class, 'index'])
         ->name('menu');
 
+    // Endereco
+    Route::get('/enderecos', [EnderecoController::class, 'index'])
+        ->name('enderecos.index');
+
+    Route::get('/enderecos/criar', [EnderecoController::class, 'criar'])
+        ->name('enderecos.criar');
+
+    Route::post('/enderecos/adicionar', [EnderecoController::class, 'adicionar'])
+        ->name('enderecos.adicionar');
+
+    Route::get('/enderecos/{id}/editar', [EnderecoController::class, 'edit'])
+        ->name('enderecos.edit');
+
+    Route::put('/enderecos/{id}', [EnderecoController::class, 'update'])
+        ->name('enderecos.update');
+
+    Route::delete('/enderecos/remover/{id}', [EnderecoController::class, 'remove'])
+        ->name('enderecos.remove');
+        
     // Carrinho
     Route::post('/carrinho/adicionar/{id}', [
         CarrinhoController::class, 'adicionar'
@@ -41,18 +60,15 @@ Route::middleware('auth')
      Route::get('/profile', [ProfileController::class, 'show'])
         ->name('profile.show');
 
-    // Editar perfil
     Route::get('/profile/edit', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
     Route::patch('/profile', [ProfileController::class, 'update'])
         ->name('profile.update');
 
-    // Tela de confirmação para excluir a conta
     Route::get('/profile/delete', [ProfileController::class, 'confirmDelete'])
         ->name('profile.confirmDelete');
 
-    // Excluir conta
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
