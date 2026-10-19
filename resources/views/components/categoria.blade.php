@@ -33,7 +33,7 @@
         </a>
     @endif
 
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         @forelse($categoria->produtos as $produto)
             <x-produto :produto="$produto" :isAdmin="$isAdmin" />
         @empty

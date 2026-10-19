@@ -89,15 +89,16 @@
                 </div>
             @endif
 
-            <div class="mt-8">
+           <div class="mt-8">
                 <a
-                    href="{{ route('menu') }}"
+                    href="{{ auth()->user()->tipo === 'admin'
+                        ? route('admin.menu')
+                        : route('menu') }}"
                     class="text-sm text-zinc-400 transition hover:text-white"
                 >
                     ← Voltar ao menu
                 </a>
             </div>
-
         </div>
     </div>
 </x-app-layout>

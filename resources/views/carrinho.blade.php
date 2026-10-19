@@ -3,7 +3,7 @@
         
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-3xl font-extrabold text-white tracking-tight">Meu Carrinho</h1>
-            <a href="{{ route('menu') }}" class="text-sm font-medium text-gray-400 hover:text-red-500 transition">
+            <a href="{{ url()->previous() }}" class="text-sm font-medium text-gray-400 hover:text-red-500 transition">
                 &larr; Voltar ao Cardápio
             </a>
         </div>

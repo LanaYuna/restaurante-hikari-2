@@ -2,7 +2,7 @@
     <div class="py-12 px-4 flex justify-center items-center min-h-screen">
         <div class="w-full max-w-lg bg-gray-900 p-8 rounded-xl shadow-2xl">
 
-            <a href="{{ route('menu') }}"
+            <a href="{{ url()->previous() }}"
                class="text-gray-400 hover:text-white transition">
                 ← Voltar ao menu
             </a>
