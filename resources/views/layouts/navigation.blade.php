@@ -10,11 +10,6 @@
                         placeholder="Busque por algum prato..." 
                         class="w-full bg-zinc-800/80 border border-zinc-700 text-sm rounded-full py-2 pl-4 pr-10 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                     >
-                    <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-white">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                    </button>
                 </form>
             </div>
 

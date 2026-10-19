@@ -1,9 +1,13 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-12 px-6">
-        <h1 class="text-2xl font-bold text-white mb-6">
+        <a href="{{ route('admin.relatorios.index') }}">
+            Voltar
+        </a>
+
+        <h1 class="text-2xl font-bold text-white my-6">
             Produtos mais baratos
         </h1>
-
+        
         <div class="space-y-3">
             @forelse ($produtos as $produto)
                 <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4">

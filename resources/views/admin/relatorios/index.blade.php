@@ -1,8 +1,9 @@
 <x-app-layout>
 
-    <div>
-        <h1>Relatórios</h1>
-        <p>Visualize indicadores e estatísticas do restaurante.</p>
+    <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <a href="{{ route('admin.menu') }}">Voltar para o menu</a>
+
+        <h1 class="mb-4">Relatórios</h1>
 
         <div class="grid grid-cols-3 gap-6">
             <a href="{{ route('admin.relatorios.produtos.baratos') }}" 
