@@ -23,8 +23,11 @@
                         Você ainda não possui endereços registrados.
                     </p>
                 </div>
-
-                <a href="{{ route('enderecos.criar') }}">
+    
+                <a href="{{ route('enderecos.criar') }}"
+                    class="mt-4 inline-flex justify-center rounded-lg
+                        bg-red-600 px-4 py-2 font-medium
+                        text-white transition hover:bg-red-700">
                     Criar endereço
                 </a>
             @else
@@ -48,30 +51,38 @@
                                     </p>
                                 </div>
 
-                                <a
-                                    href="{{ route('enderecos.edit', $endereco->id) }}"
-                                    class="inline-flex justify-center rounded-lg
-                                           bg-red-600 px-4 py-2 font-medium
-                                           text-white transition hover:bg-red-700"
-                                >
-                                    Editar endereço
-                                </a> 
+                                <div class="flex gap-2">
+                                    <a
+                                        href="{{ route('enderecos.edit', $endereco->id) }}"
+                                        class="inline-flex justify-center rounded-lg
+                                            bg-red-600 px-4 py-2 font-medium
+                                            text-white transition hover:bg-red-700"
+                                    >
+                                        Editar endereço
+                                    </a> 
 
-                                <form 
-                                    action="{{ route('endereco.remove', $endereco->id) }}" 
-                                    method="POST"  
-                                    onsubmit="return confirm('Deseja realmente remover este endereço?')"
-                                >
+                                    <form 
+                                        action="{{ route('enderecos.remove', $endereco->id) }}" 
+                                        method="POST"  
+                                        onsubmit="return confirm('Deseja realmente remover este endereço?')"
+                                    >
 
-                                    @csrf
-                                    @method('DELETE')
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button 
-                                        type="submit" class="text-red-600 text-sm font-semibold">
-                                        Remover
-                                    </button>
+                                        <button 
+                                            type="submit"
+                                            class="inline-flex justify-center rounded-lg
+                                            bg-red-600 px-4 py-2 font-medium
+                                            text-white transition hover:bg-red-700"
+                                            >
+                                            Remover
+                                        </button>
 
-                                </form>
+                                    </form>
+
+                                </div>
+
                             </div>
                         </div>
                     @endforeach

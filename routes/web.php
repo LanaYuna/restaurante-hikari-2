@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\AdmRelatorioController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\AdmMenuController;
 use App\Http\Controllers\Admin\AdmProdutoController;
+use App\Http\Controllers\Admin\AdmCategoriaController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\EnderecoController;
 
@@ -14,7 +16,6 @@ Route::get('/', function () {
         : redirect()->route('login');
 });
 
-// Todas as rotas abaixo exigem login.
 Route::middleware('auth')->group(function () {
 
     // Menu do usuário
@@ -80,6 +81,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/menu', [AdmMenuController::class, 'index'])
             ->name('menu');
+        
+        // Produtos
 
         Route::get('/categorias/{categoria}/produtos/criar', [
             AdmProdutoController::class, 'criar'
@@ -100,6 +103,36 @@ Route::middleware('auth')->group(function () {
         Route::delete('/produtos/{id}', [
             AdmProdutoController::class, 'remover'
         ])->name('produtos.remover');
+
+        // Categorias
+
+        Route::get('/categoria/criar', 
+            [AdmCategoriaController::class, 'criar'
+        ])->name('categoria.criar');
+
+        Route::post('/categoria/add', 
+            [AdmCategoriaController::class, 'adicionar'
+        ])->name('categoria.adicionar');
+
+        Route::get('/categoria/{id}/edit', [
+            AdmCategoriaController::class, 'editar'
+        ])->name('categoria.editar');
+
+        Route::put('/categoria/{id}/atualizar', [
+            AdmCategoriaController::class, 'atualizar'
+        ])->name('categoria.atualizar');
+
+        Route::delete('/categoria/{id}', 
+            [AdmCategoriaController::class, 'remover'
+        ])->name('categoria.remover');
+
+        // Relatorios
+
+        Route::get('/relatorio',
+            [AdmRelatorioController::class, 'index'
+        ])->name('relatorio.index');
+
+
     });
 });
 

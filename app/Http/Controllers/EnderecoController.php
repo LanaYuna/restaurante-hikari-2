@@ -28,7 +28,7 @@ class EnderecoController extends Controller
             'complemento' => 'nullable|string|max:255',
         ]);
 
-        Endereco::create($dados);
+        $request->user()->enderecos()->create($dados);
 
         return redirect()
             ->route('enderecos.index')

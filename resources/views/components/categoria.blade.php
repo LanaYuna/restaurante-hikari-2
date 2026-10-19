@@ -1,13 +1,31 @@
 @props(['categoria', 'isAdmin' => false])
 
 <div class="mb-8">
-    <h3 class="text-3xl font-bold text-white pb-2 mb-4 mr-4 inline-block">
+    <h3 class="text-3xl font-bold text-white pb-2 mb-4 mr-4">
         {{ $categoria->descricao }}
     </h3>
 
     @if($isAdmin)
-        <button class="bg-blue-600">Editar</button>
-        <button class="bg-red-600">Remover</button>
+        <div class="flex gap-2">
+            <a 
+                href="{{ route('admin.categoria.editar', $categoria->id) }}"
+                class="bg-blue-600">
+                Editar categoria
+            </a>
+
+            <form 
+                action="{{ route('admin.categoria.remover', $categoria->id) }}" 
+                method="POST"  
+                onsubmit="return confirm('Deseja realmente remover esta categoria?')">
+
+                @csrf
+                @method('DELETE')
+
+                <button class="bg-red-600">Remover categoria</button>
+
+            </form>
+        </div>
+
         <a 
             href="{{ route('admin.produtos.criar', $categoria->id) }}" 
             class="bg-blue-600 w-64">

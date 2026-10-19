@@ -17,7 +17,6 @@
                 @csrf
                 @method('PUT')
 
-
                 <div>
                     <label for="nome" class="block text-sm font-medium text-gray-300 mb-1">Nome do Produto:</label>
                     <input
