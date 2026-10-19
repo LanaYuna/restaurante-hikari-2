@@ -59,6 +59,6 @@ class AdmCategoriaController extends Controller
 
         return redirect()
             ->route('admin.menu')
-            ->with('success', 'Produto removido com sucesso!');
+            ->with('success', 'Categoria removida com sucesso!');
     }
 }

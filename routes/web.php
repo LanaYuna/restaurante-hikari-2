@@ -56,7 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/carrinho/editar/{id}', [
         CarrinhoController::class, 'editar'
     ])->name('carrinho.editar');
-
+    
+    Route::post('/carrinho/pedido', [CarrinhoController::class, 'finalizar'])->name('carrinho.pedido');
+    
     // Perfil
      Route::get('/profile', [ProfileController::class, 'show'])
         ->name('profile.show');
@@ -128,10 +130,13 @@ Route::middleware('auth')->group(function () {
 
         // Relatorios
 
-        Route::get('/relatorio',
-            [AdmRelatorioController::class, 'index'
-        ])->name('relatorio.index');
-
+        Route::get('/relatorios',[AdmRelatorioController::class, 'index'])->name('relatorios.index');
+        Route::get('/relatorios/produtosBaratos', [AdmRelatorioController::class, 'exibirProdutosBaratos'])->name('relatorios.produtos.baratos');
+        Route::get('/relatorios/produtosVendidos', [AdmRelatorioController::class, 'exibirProdutosVendidos'])->name('relatorios.produtos.vendidos');
+        Route::get('/relatorios/categorias', [AdmRelatorioController::class, 'exibirCategorias'])->name('relatorios.categorias');
+        Route::get('/relatorios/faturamento', [AdmRelatorioController::class, 'exibirFaturamento'])->name('relatorios.faturamento');
+        Route::get('/relatorios/clientes', [AdmRelatorioController::class, 'exibirClientes'])->name('relatorios.clientes');
+        
 
     });
 });

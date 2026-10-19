@@ -1,9 +1,36 @@
 <x-app-layout>
     <div class="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
+    @if (session('success'))
+        <div
+            id="success-alert"
+            class="mb-4 rounded-lg border border-green-800 bg-green-950
+                p-4 text-green-300 transition-opacity duration-500"
+        >
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.getElementById('success-alert');
+
+                if (alert) {
+                    alert.classList.add('opacity-0');
+
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 500);
+                }
+            }, 3000);
+        </script>
+    @endif
+    
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-3xl font-extrabold text-white tracking-tight">Meu Carrinho</h1>
-            <a href="{{ url()->previous() }}" class="text-sm font-medium text-gray-400 hover:text-red-500 transition">
+            <a href="{{ auth()->user()->tipo === 'admin'
+                        ? route('admin.menu')
+                        : route('menu') }}"
+                        class="text-sm font-medium text-gray-400 hover:text-red-500 transition">
                 &larr; Voltar ao Cardápio
             </a>
         </div>
@@ -74,20 +101,67 @@
                 @endforeach
             </div>
 
-            <div class="mt-8 bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
+            <div class="mt-8 bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl">
+
+                <div class="mb-6">
                     <span class="text-gray-400 text-sm">Valor Total do Pedido:</span>
+
                     <h2 class="text-2xl font-black text-white">
                         R$ {{ number_format($total, 2, ',', '.') }}
                     </h2>
                 </div>
 
-                <button
-                    type="button"
-                    class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl transition duration-200 shadow-lg shadow-red-900/40 text-center"
-                >
-                    Finalizar Pedido
-                </button>
+                <form action="{{ route('carrinho.pedido') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-6">
+                        <label for="forma_pagamento"
+                            class="block text-sm font-medium text-gray-300 mb-2">
+                            Forma de pagamento
+                        </label>
+
+                        <select
+                            name="forma_pagamento"
+                            id="forma_pagamento"
+                            required
+                            class="w-full bg-gray-800 border border-gray-700
+                                text-white rounded-lg px-4 py-3
+                                focus:outline-none focus:border-red-600
+                                focus:ring-1 focus:ring-red-600"
+                        >
+                            <option value="">Selecione uma forma de pagamento</option>
+
+                            <option value="debito" @selected(old('forma_pagamento') === 'debito')>
+                                Cartão de débito
+                            </option>
+
+                            <option value="credito" @selected(old('forma_pagamento') === 'credito')>
+                                Cartão de crédito
+                            </option>
+
+                            <option value="pix" @selected(old('forma_pagamento') === 'pix')>
+                                PIX
+                            </option>
+
+                            <option value="dinheiro" @selected(old('forma_pagamento') === 'dinheiro')>
+                                Dinheiro
+                            </option>
+                        </select>
+
+                        @error('forma_pagamento')
+                            <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white
+                            font-bold py-3 px-8 rounded-xl transition duration-200
+                            shadow-lg shadow-red-900/40"
+                    >
+                        Finalizar Pedido
+                    </button>
+                </form>
             </div>
         @endif
     </div>

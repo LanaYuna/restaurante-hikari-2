@@ -1,6 +1,6 @@
 @props(['produto', 'isAdmin' => false])
 
-<div class="bg-zinc-900 overflow-hidden shadow-sm sm:rounded-lg p-4 flex flex-col justify-between w-64">
+<div class="bg-zinc-900 overflow-hidden shadow-sm sm:rounded-lg p-4 flex flex-col justify-between w-64 my-5">
     <div>
         <img src="{{ asset('storage/' . $produto->imagem) }}" alt="{{ $produto->nome }}" class="h-32 w-32 object-cover rounded-md mb-2">
         <h4 class="font-bold text-white text-lg">{{ $produto->nome }}</h4>

@@ -6,10 +6,10 @@
     </h3>
 
     @if($isAdmin)
-        <div class="flex gap-2">
+        <div class="flex gap-2 my-5">
             <a 
                 href="{{ route('admin.categoria.editar', $categoria->id) }}"
-                class="bg-blue-600">
+                class= "bg-indigo-700 w-30 font-medium text-sm px-3 py-2 rounded-lg hover:bg-indigo-800 transition">
                 Editar categoria
             </a>
 
@@ -21,14 +21,16 @@
                 @csrf
                 @method('DELETE')
 
-                <button class="bg-red-600">Remover categoria</button>
+                <button class="bg-red-600 w-30 font-medium text-sm px-3 py-2 rounded-lg hover:bg-red-700 transition">
+                    Remover categoria
+                </button>
 
             </form>
         </div>
 
         <a 
             href="{{ route('admin.produtos.criar', $categoria->id) }}" 
-            class="bg-blue-600 w-64">
+            class="bg-indigo-700 w-6 font-medium text-sm px-3 py-2 rounded-lg hover:bg-indigo-800 transition">
             Adicionar novo produto
         </a>
     @endif
