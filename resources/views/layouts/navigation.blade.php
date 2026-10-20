@@ -3,14 +3,7 @@
         <div class="flex justify-between h-16 items-center gap-4">
             
             <div class="flex-1 max-w-xl">
-                <form action="{{ route('menu') }}" method="GET" class="relative">
-                    <input 
-                        type="text" 
-                        name="search" 
-                        placeholder="Busque por algum prato..." 
-                        class="w-full bg-zinc-800/80 border border-zinc-700 text-sm rounded-full py-2 pl-4 pr-10 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    >
-                </form>
+                <h1 class="font-bold">Hikari 2</h1>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:space-x-6">

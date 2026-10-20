@@ -1,9 +1,9 @@
 <x-app-layout>
 
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <a href="{{ route('admin.menu') }}">Voltar para o menu</a>
+        <a href="{{ route('admin.menu') }}" class="text-sm">Voltar para o menu</a>
 
-        <h1 class="mb-4">Relatórios</h1>
+        <h1 class="my-4 text-3xl font-bold">Relatórios</h1>
 
         <div class="grid grid-cols-3 gap-6">
             <a href="{{ route('admin.relatorios.produtos.baratos') }}" 
@@ -18,7 +18,7 @@
                 </p>
             </a>
 
-             <a href="{{ route('admin.relatorios.categorias') }}" 
+            <a href="{{ route('admin.relatorios.categorias') }}" 
                 class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-red-600 transition-all group"
             >
                 <h2 class="text-xl font-bold text-white group-hover:text-red-500">
@@ -30,7 +30,7 @@
                 </p>
             </a>
 
-             <a href="{{ route('admin.relatorios.clientes') }}" 
+            <a href="{{ route('admin.relatorios.clientes') }}" 
                 class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-red-600 transition-all group"
             >
                 <h2 class="text-xl font-bold text-white group-hover:text-red-500">
@@ -42,7 +42,7 @@
                 </p>
             </a>
 
-             <a href="{{ route('admin.relatorios.produtos.vendidos') }}" 
+            <a href="{{ route('admin.relatorios.produtos.vendidos') }}" 
                 class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-red-600 transition-all group"
             >
                 <h2 class="text-xl font-bold text-white group-hover:text-red-500">
@@ -54,7 +54,7 @@
                 </p>
             </a>
 
-             <a href="{{ route('admin.relatorios.faturamento') }}" 
+            <a href="{{ route('admin.relatorios.faturamento') }}" 
                 class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-red-600 transition-all group"
             >
                 <h2 class="text-xl font-bold text-white group-hover:text-red-500">

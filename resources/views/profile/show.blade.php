@@ -2,8 +2,12 @@
     <div class="py-12 px-4 flex justify-center items-center min-h-screen">
         <div class="w-full max-w-lg bg-gray-900 p-8 rounded-xl shadow-2xl">
 
-            <a href="{{ url()->previous() }}"
-               class="text-gray-400 hover:text-white transition">
+            <a
+                href="{{ auth()->user()->tipo === 'admin'
+                    ? route('admin.menu')
+                    : route('menu') }}"
+                class="text-sm text-zinc-400 transition hover:text-white"
+                >
                 ← Voltar ao menu
             </a>
 

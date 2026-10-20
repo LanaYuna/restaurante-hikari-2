@@ -1,7 +1,8 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-12 px-6">
-        <a href="{{ route('admin.relatorios.index') }}">
-            Voltar
+        <a href="{{ route('admin.relatorios.index') }}"
+            class="text-sm text-zinc-400 hover:text-red-500 transition">
+            &larr; Voltar
         </a>
 
         <h1 class="text-2xl font-bold text-white my-6">

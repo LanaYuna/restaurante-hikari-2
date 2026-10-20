@@ -1,4 +1,3 @@
-```html
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-12 px-6">
         <a href="{{ route('admin.relatorios.index') }}"
@@ -50,4 +49,3 @@
         </div>
     </div>
 </x-app-layout>
-```
