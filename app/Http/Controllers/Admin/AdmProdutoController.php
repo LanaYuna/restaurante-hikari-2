@@ -37,7 +37,7 @@ class AdmProdutoController extends Controller
         $produto->save();
 
         return redirect()
-            ->route('admin.menu', $produto->id)
+            ->route('admin.menu')
             ->with('success', 'Produto atualizado com sucesso!');
     }
     

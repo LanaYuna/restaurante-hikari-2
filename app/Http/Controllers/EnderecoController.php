@@ -11,7 +11,6 @@ class EnderecoController extends Controller
     {
         $enderecos = $request->user()
             ->enderecos()
-            ->latest()
             ->get();
 
         return view('enderecos.index', compact('enderecos'));

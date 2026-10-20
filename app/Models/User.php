@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Endereco::class);
     }
+
+    public function pedidos(): HasMany
+    {
+        return $this->hasMany(Pedido::class);
+    }
 }
