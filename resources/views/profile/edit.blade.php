@@ -23,7 +23,7 @@
 
             <form action="{{ route('profile.update') }}" method="POST" class="space-y-5">
                 @csrf
-                @method('PATCH')
+                @method('PUT')
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-300 mb-1">

@@ -62,7 +62,7 @@
                                 class="flex items-center gap-2"
                             >
                                 @csrf
-                                @method('PATCH')
+                                @method('PUT')
 
                                 <input
                                     type="number"

@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/carrinho/remover/{id}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
 
-    Route::patch('/carrinho/editar/{id}', [CarrinhoController::class, 'editar'])->name('carrinho.editar');
+    Route::put('/carrinho/editar/{id}', [CarrinhoController::class, 'editar'])->name('carrinho.editar');
     
     Route::post('/carrinho/pedido', [CarrinhoController::class, 'finalizar'])->name('carrinho.pedido');
     
@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/profile/delete', [ProfileController::class, 'confirmDelete'])->name('profile.confirmDelete');
 
