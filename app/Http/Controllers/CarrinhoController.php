@@ -101,54 +101,53 @@ class CarrinhoController extends Controller
                 ->with('erro', 'Seu carrinho está vazio.');
         }
 
-        $pedido = DB::transaction(function () use ($carrinho, $dados) {
-        $produtos = [];
-        $total = 0;
+        DB::transaction(function () use ($carrinho, $dados) {
+            $produtos = [];
+            $total = 0;
 
-        foreach ($carrinho as $produtoId => $quantidade) {
-            $quantidade = filter_var(
-                $quantidade,
-                FILTER_VALIDATE_INT,
-                ['options' => ['min_range' => 1, 'max_range' => 99]]
-            );
+            foreach ($carrinho as $produtoId => $quantidade) {
+                $quantidade = filter_var(
+                    $quantidade,
+                    FILTER_VALIDATE_INT,
+                    ['options' => ['min_range' => 1, 'max_range' => 99]]
+                );
 
-            if ($quantidade === false) {
-                throw \Illuminate\Validation\ValidationException::withMessages([
-                    'carrinho' => 'Existe uma quantidade inválida no carrinho.',
+                if ($quantidade === false) {
+                    throw \Illuminate\Validation\ValidationException::withMessages([
+                        'carrinho' => 'Existe uma quantidade inválida no carrinho.',
+                    ]);
+                }
+
+                $produto = Produto::findOrFail($produtoId);
+
+                $subtotal = (float) $produto->preco * $quantidade;
+
+                $produtos[] = [
+                    'produto' => $produto,
+                    'quantidade' => $quantidade,
+                    'subtotal' => $subtotal,
+                ];
+
+                $total += $subtotal;
+            }
+
+            $pedido = Pedido::create([
+                'user_id' => auth()->id(),
+                'total' => $total,
+                'forma_pagamento' => $dados['forma_pagamento'],
+                'status' => 'pago',
+            ]);
+
+            foreach ($produtos as $item) {
+                $pedido->itens()->create([
+                    'produto_id' => $item['produto']->id,
+                    'nome_produto' => $item['produto']->nome,
+                    'preco_unitario' => $item['produto']->preco,
+                    'quantidade' => $item['quantidade'],
+                    'subtotal' => $item['subtotal'],
                 ]);
             }
 
-            $produto = Produto::findOrFail($produtoId);
-
-            $subtotal = (float) $produto->preco * $quantidade;
-
-            $produtos[] = [
-                'produto' => $produto,
-                'quantidade' => $quantidade,
-                'subtotal' => $subtotal,
-            ];
-
-            $total += $subtotal;
-        }
-
-        $pedido = Pedido::create([
-            'user_id' => auth()->id(),
-            'total' => $total,
-            'forma_pagamento' => $dados['forma_pagamento'],
-            'status' => 'pago',
-        ]);
-
-        foreach ($produtos as $item) {
-            $pedido->itens()->create([
-                'produto_id' => $item['produto']->id,
-                'nome_produto' => $item['produto']->nome,
-                'preco_unitario' => $item['produto']->preco,
-                'quantidade' => $item['quantidade'],
-                'subtotal' => $item['subtotal'],
-            ]);
-        }
-
-        return $pedido;
         });
 
         session()->forget('carrinho');
