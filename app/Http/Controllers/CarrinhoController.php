@@ -34,7 +34,7 @@ class CarrinhoController extends Controller
 
     public function adicionar($id)
     {
-        $produto = Produto::findOrFail($id);
+        Produto::findOrFail($id);
 
         $carrinho = session()->get('carrinho', []);
 
