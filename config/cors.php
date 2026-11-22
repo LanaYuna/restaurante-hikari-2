@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 return [
 
     'paths' => ['api/*'],
@@ -15,5 +14,3 @@ return [
     'supports_credentials' => true,
 
 ];
-
-?>

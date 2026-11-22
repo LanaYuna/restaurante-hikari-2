@@ -9,9 +9,34 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class ItemController extends Controller
 {
+    public function login(Request $request){
+        
+        $credenciais = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $credenciais['email'])->first();
+
+        if (!$user || !Hash::check($credenciais['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Credenciais inválidas'
+            ], 401);
+        }
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ], 200);
+    }
+
     public function index(): JsonResponse{
         return response()->json(Produto::all(), 200);
     }
@@ -75,7 +100,9 @@ class ItemController extends Controller
         $carrinho = session()->get('carrinho', []);
 
         if (!isset($carrinho[$id])) {
-            return response()->json("Produto não encontrado no carrinho", 404);
+            return response()->json([
+                'message' => 'Produto não encontrado no carrinho'
+            ], 404);
         }
 
         $carrinho[$id] = $dados['quantidade'];
@@ -88,14 +115,16 @@ class ItemController extends Controller
         );
     }
 
-
     public function finalizar(Request $request): JsonResponse{
+        
         $dados = $request->validate([
             'forma_pagamento' => [
                 'required',
                 Rule::in(['debito', 'credito', 'pix', 'dinheiro']),
             ],
         ]);
+
+        $userId = $request->user()->id;
 
         $carrinho = session()->get('carrinho', []);
     
@@ -106,7 +135,7 @@ class ItemController extends Controller
             );
         }
 
-        DB::transaction(function () use ($carrinho, $dados) {
+        DB::transaction(function () use ($carrinho, $dados, $userId) {
             $produtos = [];
             $total = 0;
 
@@ -137,7 +166,7 @@ class ItemController extends Controller
             }
 
             $pedido = Pedido::create([
-                'user_id' => auth()->id(),
+                'user_id' => $userId,
                 'total' => $total,
                 'forma_pagamento' => $dados['forma_pagamento'],
                 'status' => 'pago',
