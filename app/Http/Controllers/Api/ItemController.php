@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class ItemController extends Controller
 {
     public function login(Request $request){
-        
+
         $credenciais = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
